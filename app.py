@@ -23,7 +23,7 @@ def createNft():
 
     return render_template('index.html', value = "Execute Transaction", transaction = r.json()['transaction_url'])
 
-@app.route('/get-contract', methods = ['POST'])
+@app.route('/get-contracts', methods = ['POST'])
 def getContracts():
     url = 'https://thentic.tech/api/contracts'
     headers = {'Content-Type': 'application/json'}
@@ -41,4 +41,19 @@ def getContracts():
 
     return render_template('index.html', contracts= contractList)
 
+@app.route('/mint-nft', methods = ['POST'])
+def mintNft():
+    url = 'https://thentic.tech/api/nfts/mint'
+    headers = {'Content-Type': 'application/json'}
+    
+    data = {'key': request.form['apiKey'],
+            'chain_id': request.form['chainId'],
+            'contract': request.form['nftContract'],
+            'nft_id': request.form['nftId'], 
+            'nft_data': request.form['nftData'],
+            'to': request.form['to']
+            }
+    
+    r = requests.post(url, json=data, headers=headers)
 
+    return render_template('index.html', value = "Execute Transaction", transaction = r.json()['transaction_url'])
