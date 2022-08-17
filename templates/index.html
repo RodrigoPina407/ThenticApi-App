@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+
+    <h1>Create NFT Contract</h1>
+    <form action="/create-nft" method="post" >
+        API Key: <input name="apiKey" type="text" /> <br />
+        NFT Name: <input name="nftName" type="text" /> <br />
+        NFT Symbol: <input name="nftSymbol" type="text" /> <br />
+        Chain Id: <input name="chainId" type="text" /> <br />
+        <input type="submit" />
+    </form>
+
+    <hr>
+
+    <form action="/get-nft" method="post">
+        <h1>Show NFT Contracts</h1>
+        API Key: <input name="apiKey" type="text" /> <br />
+        Chain Id: <input name="chainId" type="text" /> <br />
+        <input type="submit" />
+    </form>
+
+    <hr>
+    <h2>Results:</h2>
+    <p href={{transaction}}>{{ value }}</p>
+    <ul> 
+        {% for contract in contracts %} 
+          <li><b>address:</b> {{ contract.address }} <br> <b>name:</b> {{ contract.name }} </li> 
+        {% endfor %} 
+    </ul> 
+
+</body>
+</html>
