@@ -23,8 +23,8 @@ def createNft():
 
     return render_template('index.html', value = "Execute Transaction", transaction = r.json()['transaction_url'])
 
-@app.route('/get-nft', methods = ['POST'])
-def getNft():
+@app.route('/get-contract', methods = ['POST'])
+def getContracts():
     url = 'https://thentic.tech/api/contracts'
     headers = {'Content-Type': 'application/json'}
     data = {'key': request.form['apiKey'],
