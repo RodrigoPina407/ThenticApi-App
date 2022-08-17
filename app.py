@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request
 import requests
 import webbrowser
 
@@ -20,10 +20,25 @@ def createNft():
             'short_name': request.form['nftSymbol']}
     
     r = requests.post(url, json=data, headers=headers)
-    webbrowser.open_new_tab(r.json()['transaction_url'])
 
-    return redirect("/", code=302)
+    return render_template('index.html', value = "Execute Transaction", transaction = r.json()['transaction_url'])
 
-@app.route('/get-nft', methods = ['GET'])
-def createNft():
+@app.route('/get-nft', methods = ['POST'])
+def getNft():
+    url = 'https://thentic.tech/api/contracts'
+    headers = {'Content-Type': 'application/json'}
+    data = {'key': request.form['apiKey'],
+            'chain_id': request.form['chainId']
+            }
+
+    r = requests.get(url, json=data, headers=headers)
+
+    contractList = []
+
+    for c in r.json()['contracts']:
+      if c['contract'] != None:
+        contractList.append({'address': c['contract'], 'name':c['name']})
+
+    return render_template('index.html', contracts= contractList)
+
 
