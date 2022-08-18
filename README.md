@@ -1,4 +1,4 @@
-# TenticAPI Test APP
+# ThenticAPI Test APP
 
 ## How to run
 
