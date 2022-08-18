@@ -12,17 +12,18 @@
         API Key: <input name="apiKey" type="text" /> <br/>
         NFT Name: <input name="nftName" type="text" /> <br/>
         NFT Symbol: <input name="nftSymbol" type="text" /> <br/>
-        Chain Id: <input name="chainId" type="text" /> <br/>
-        <input type="submit" />
+        Chain Id: <input name="chainId" type="text" /> <br/><br/>
+        <input type="submit" value="Deploy Contract" />
     </form>
 
     <hr>
 
-    <form action="/get-contracts" method="post">
-        <h3>Show NFT Contracts</h3>
+    <form method="post">
+        <h3>Show NFTs/Contracts</h3>
         API Key: <input name="apiKey" type="text" /> <br/>
-        Chain Id: <input name="chainId" type="text" /> <br/>
-        <input type="submit" />
+        Chain Id: <input name="chainId" type="text" /> <br/><br/>
+        <input type="submit" value="Get Contract" formaction="/get-contracts"/>
+        <input type="submit" value="Get NFTs" formaction="/get-nfts"/>
     </form>
 
     <hr>
@@ -34,7 +35,7 @@
         Contract: <input name="nftContract" type="text" /> <br/>
         NFT ID: <input name="nftId" type="text" /> <br/>
         NFT DATA: <input name="nftData" type="text" /> <br/>
-        TO: <input name="to" type="text" /> <br/>
+        TO: <input name="to" type="text" /> <br/><br/>
         <input type="submit" />
     </form>
 
@@ -45,6 +46,17 @@
     <ul> 
         {% for contract in contracts %} 
           <li><b>address:</b> {{ contract.address }} <br> <b>name:</b> {{ contract.name }} </li> 
+        {% endfor %} 
+    </ul> 
+    <ul> 
+        {% for nft in nfts %} 
+          <li>
+            <b>address:</b> {{ nft.address }} <br> 
+            <b>name:</b> {{ nft.name }} <br>
+            <b>symbol:</b> {{ nft.symbol }} <br>
+            <b>id:</b> {{ nft.id }} <br>
+            <b>data:</b> {{ nft.data }} <br>
+        </li> 
         {% endfor %} 
     </ul> 
 
