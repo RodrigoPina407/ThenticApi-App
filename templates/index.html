@@ -7,7 +7,7 @@
 </head>
 
 <h2>Results:</h2>
-    <a target=”_blank” href={{transaction}}>{{ value }}</a>
+    <a target=”_blank” href={{transaction}}><b>{{ value }}</b></a>
     <ul> 
         {% for contract in contracts %} 
           <li><b>address:</b> {{ contract.address }} <br> <b>name:</b> {{ contract.name }} </li> 
@@ -28,7 +28,12 @@
     <hr>
 
 <body>
-
+    <form action="/get-key" method="post">
+        <input type="submit" value="Get API Key">
+        <input disabled="true" type="text" value={{key}}>
+    </form>
+    
+    
     <form action="/create-nft" method="post" >
         <h3>Create NFT Contract</h3>
         API Key: <input name="apiKey" type="text" /> <br/>
@@ -58,7 +63,7 @@
         NFT ID: <input name="nftId" type="text" /> <br/>
         NFT DATA: <input name="nftData" type="text" /> <br/>
         TO: <input name="to" type="text" /> <br/><br/>
-        <input type="submit" />
+        <input type="submit" value="Mint" />
     </form>
 
     <hr>
@@ -71,7 +76,7 @@
         NFT ID: <input name="nftId" type="text" /> <br/>
         FROM: <input name="from" type="text" /> <br/>
         TO: <input name="to" type="text" /> <br/><br/>
-        <input type="submit" />
+        <input type="submit" value="Transfer" />
     </form>
 
 </body>

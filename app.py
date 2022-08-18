@@ -98,3 +98,12 @@ def transferNft():
     r = requests.post(url, json=data, headers=headers)
 
     return render_template('index.html', value = "Execute Transaction", transaction = r.json()['transaction_url'])
+
+
+
+@app.route('/get-key', methods = ['POST'])
+def getKey():
+    url = 'https://thentic.tech/api/key'
+
+    r = requests.get(url)
+    return render_template('index.html', key = r.text)
