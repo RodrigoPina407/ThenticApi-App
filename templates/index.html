@@ -3,16 +3,38 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title></title>
+    <title>ThenticApi App</title>
 </head>
+
+<h2>Results:</h2>
+    <a target=”_blank” href={{transaction}}>{{ value }}</a>
+    <ul> 
+        {% for contract in contracts %} 
+          <li><b>address:</b> {{ contract.address }} <br> <b>name:</b> {{ contract.name }} </li> 
+        {% endfor %} 
+    </ul> 
+    <ul> 
+        {% for nft in nfts %} 
+          <li>
+            <b>address:</b> {{ nft.address }} <br> 
+            <b>name:</b> {{ nft.name }} <br>
+            <b>symbol:</b> {{ nft.symbol }} <br>
+            <b>id:</b> {{ nft.id }} <br>
+            <b>data:</b> {{ nft.data }} <br>
+        </li> 
+        {% endfor %} 
+    </ul> 
+
+    <hr>
+
 <body>
 
     <form action="/create-nft" method="post" >
         <h3>Create NFT Contract</h3>
         API Key: <input name="apiKey" type="text" /> <br/>
+        Chain Id: <input name="chainId" type="text" /> <br/><br/>
         NFT Name: <input name="nftName" type="text" /> <br/>
         NFT Symbol: <input name="nftSymbol" type="text" /> <br/>
-        Chain Id: <input name="chainId" type="text" /> <br/><br/>
         <input type="submit" value="Deploy Contract" />
     </form>
 
@@ -41,24 +63,16 @@
 
     <hr>
 
-    <h2>Results:</h2>
-    <a target=”_blank” href={{transaction}}>{{ value }}</a>
-    <ul> 
-        {% for contract in contracts %} 
-          <li><b>address:</b> {{ contract.address }} <br> <b>name:</b> {{ contract.name }} </li> 
-        {% endfor %} 
-    </ul> 
-    <ul> 
-        {% for nft in nfts %} 
-          <li>
-            <b>address:</b> {{ nft.address }} <br> 
-            <b>name:</b> {{ nft.name }} <br>
-            <b>symbol:</b> {{ nft.symbol }} <br>
-            <b>id:</b> {{ nft.id }} <br>
-            <b>data:</b> {{ nft.data }} <br>
-        </li> 
-        {% endfor %} 
-    </ul> 
+    <form action="/transfer-nft" method="post" >
+        <h3>Transfer NFT</h1>
+        API Key: <input name="apiKey" type="text" /> <br/>
+        Chain Id: <input name="chainId" type="text" /> <br/>
+        Contract: <input name="nftContract" type="text" /> <br/>
+        NFT ID: <input name="nftId" type="text" /> <br/>
+        FROM: <input name="from" type="text" /> <br/>
+        TO: <input name="to" type="text" /> <br/><br/>
+        <input type="submit" />
+    </form>
 
 </body>
 </html>
