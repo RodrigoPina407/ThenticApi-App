@@ -80,3 +80,21 @@ def getNft():
         })
 
     return render_template('index.html', nfts= nftList)
+
+
+@app.route('/transfer-nft', methods = ['POST'])
+def transferNft():
+    url = 'https://thentic.tech/api/nfts/transfer'
+    headers = {'Content-Type': 'application/json'}
+    
+    data = {'key': request.form['apiKey'],
+            'chain_id': request.form['chainId'],
+            'contract': request.form['nftContract'],
+            'nft_id': request.form['nftId'], 
+            'from': request.form['from'],
+            'to': request.form['to']
+            }
+    
+    r = requests.post(url, json=data, headers=headers)
+
+    return render_template('index.html', value = "Execute Transaction", transaction = r.json()['transaction_url'])
