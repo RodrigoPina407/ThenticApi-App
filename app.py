@@ -57,3 +57,26 @@ def mintNft():
     r = requests.post(url, json=data, headers=headers)
 
     return render_template('index.html', value = "Execute Transaction", transaction = r.json()['transaction_url'])
+
+@app.route('/get-nfts', methods = ['POST'])
+def getNft():
+    url = 'https://thentic.tech/api/nfts'
+    headers = {'Content-Type': 'application/json'}
+    
+    data = {'key': request.form['apiKey'],
+            'chain_id': request.form['chainId'],
+            }
+    r = requests.get(url, json=data, headers=headers)
+    nftList = []
+
+    for nft in r.json()['nfts']:
+      if nft['status'] == 'success':
+        nftList.append(
+        {   'address': nft['contract'], 
+            'name':nft['name'],
+            'data':nft['data'],
+            'id':nft['id'],
+            'symbol':nft['short_name']
+        })
+
+    return render_template('index.html', nfts= nftList)
